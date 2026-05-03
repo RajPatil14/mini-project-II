@@ -59,10 +59,33 @@ export default function GoesOnRoute() {
         driverId,
         busId
       })
-      const dynamicUrl = response.data.trackingUrl || `${window.location.origin}/track?tripId=${response.data.tripId}`
+      
+      let dynamicUrl = response.data.trackingUrl || `${window.location.origin}/track?tripId=${response.data.tripId}`
+      
+      // WhatsApp doesn't highlight local IPs or 'localhost' as clickable blue links.
+      // We convert them to a valid domain using nip.io wildcard DNS.
+      try {
+        const urlObj = new URL(dynamicUrl)
+        if (urlObj.hostname === 'localhost') {
+          urlObj.hostname = '127.0.0.1.nip.io'
+        } else if (/^\d+\.\d+\.\d+\.\d+$/.test(urlObj.hostname)) {
+          urlObj.hostname = `${urlObj.hostname}.nip.io`
+        }
+        dynamicUrl = urlObj.toString()
+      } catch (e) {
+        console.error("URL parsing error", e)
+      }
+
       setTrackingUrl(dynamicUrl)
-      if (selectedDriver) setAssignedDriverPhone(selectedDriver.phone)
-      setMessage('Trip started successfully. Tracking link sent.')
+      
+      if (selectedDriver) {
+        setAssignedDriverPhone(selectedDriver.phone)
+        const phone = selectedDriver.phone.replace(/\D/g, '')
+        const wLink = `https://wa.me/${phone}?text=${encodeURIComponent(dynamicUrl)}`
+        window.open(wLink, '_blank')
+      }
+      
+      setMessage('Trip started successfully. WhatsApp opened to send tracking link.')
       setDrivers(prev => prev.filter(driver => driver._id !== driverId))
       setBuses(prev => prev.filter(bus => bus._id !== busId))
       setDriverId('')

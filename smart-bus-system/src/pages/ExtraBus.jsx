@@ -80,9 +80,20 @@ export default function ExtraBus() {
 
   const handleImageChange = (e) => {
     if (e.target.files) {
-      const selectedFiles = Array.from(e.target.files).slice(0, 4) // max 4
-      setImages(selectedFiles)
+      const newFiles = Array.from(e.target.files)
+      setImages((prev) => {
+        const combined = [...prev, ...newFiles]
+        return combined.slice(0, 4) // max 4
+      })
+      // Clear input so same file can be selected again if removed
+      if (fileInputRef.current) {
+        fileInputRef.current.value = ''
+      }
     }
+  }
+
+  const removeImage = (indexToRemove) => {
+    setImages(prev => prev.filter((_, idx) => idx !== indexToRemove))
   }
 
   const handleEvaluate = async () => {
@@ -205,7 +216,15 @@ export default function ExtraBus() {
                           alt={`Upload ${idx}`} 
                           className="h-full w-full object-cover transition-transform duration-500 group-hover/img:scale-110" 
                         />
-                        <div className="absolute inset-0 bg-black/20 opacity-0 transition-opacity group-hover/img:opacity-100" />
+                        <div className="absolute inset-0 bg-black/40 opacity-0 transition-opacity group-hover/img:opacity-100 flex items-center justify-center">
+                          <button
+                            onClick={() => removeImage(idx)}
+                            className="text-white hover:text-red-400 transition-colors"
+                            title="Remove image"
+                          >
+                            <XCircle className="h-6 w-6" />
+                          </button>
+                        </div>
                       </div>
                     ))}
                   </div>
