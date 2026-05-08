@@ -126,6 +126,19 @@ export default function GoesOnRoute() {
               ))}
             </select>
 
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              <div className="rounded-3xl border border-slate-200 bg-white px-4 py-4 text-sm text-slate-700 shadow-sm">
+                <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Available drivers</p>
+                <p className="mt-3 text-3xl font-semibold text-slate-950">{drivers.length}</p>
+                <p className="mt-1 text-sm text-slate-500">Free and present drivers for this route</p>
+              </div>
+              <div className="rounded-3xl border border-slate-200 bg-white px-4 py-4 text-sm text-slate-700 shadow-sm">
+                <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Available buses</p>
+                <p className="mt-3 text-3xl font-semibold text-slate-950">{buses.length}</p>
+                <p className="mt-1 text-sm text-slate-500">Free buses assigned to this route</p>
+              </div>
+            </div>
+
             <div className="mt-6 space-y-3">
               {message && <div className="rounded-3xl bg-emerald-50 px-4 py-3 text-emerald-700 shadow-sm">{message}</div>}
               {error && <div className="rounded-3xl bg-rose-50 px-4 py-3 text-rose-700 shadow-sm">{error}</div>}
@@ -144,7 +157,7 @@ export default function GoesOnRoute() {
             <section className="rounded-[1.75rem] border border-slate-200 bg-slate-50 p-6 shadow-sm">
               <div className="flex items-center justify-between gap-3">
                 <div>
-                  <h3 className="text-xl font-semibold text-slate-900">Available Drivers</h3>
+                  <h3 className="text-xl font-semibold text-slate-900">Available Drivers ({drivers.length})</h3>
                   <p className="mt-1 text-sm text-slate-500">Choose one driver for departure.</p>
                 </div>
                 <span className="rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-sky-700">Driver pool</span>
@@ -174,7 +187,7 @@ export default function GoesOnRoute() {
             <section className="rounded-[1.75rem] border border-slate-200 bg-slate-50 p-6 shadow-sm">
               <div className="flex items-center justify-between gap-3">
                 <div>
-                  <h3 className="text-xl font-semibold text-slate-900">Available Buses</h3>
+                  <h3 className="text-xl font-semibold text-slate-900">Available Buses ({buses.length})</h3>
                   <p className="mt-1 text-sm text-slate-500">Pick a bus that matches the route.</p>
                 </div>
                 <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-slate-600">Fleet</span>
