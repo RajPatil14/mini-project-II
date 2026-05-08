@@ -90,19 +90,6 @@ export default function CameOnRoute() {
               ))}
             </select>
 
-            <div className="mt-6 grid gap-3 sm:grid-cols-2">
-              <div className="rounded-3xl border border-slate-200 bg-white px-4 py-4 text-sm text-slate-700 shadow-sm">
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Busy drivers</p>
-                <p className="mt-3 text-3xl font-semibold text-slate-950">{drivers.length}</p>
-                <p className="mt-1 text-sm text-slate-500">Drivers currently on route</p>
-              </div>
-              <div className="rounded-3xl border border-slate-200 bg-white px-4 py-4 text-sm text-slate-700 shadow-sm">
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Busy buses</p>
-                <p className="mt-3 text-3xl font-semibold text-slate-950">{buses.length}</p>
-                <p className="mt-1 text-sm text-slate-500">Buses currently assigned</p>
-              </div>
-            </div>
-
             <div className="mt-6 space-y-3">
               {message && <div className="rounded-3xl bg-emerald-50 px-4 py-3 text-emerald-700 shadow-sm">{message}</div>}
               {error && <div className="rounded-3xl bg-rose-50 px-4 py-3 text-rose-700 shadow-sm">{error}</div>}
@@ -113,7 +100,7 @@ export default function CameOnRoute() {
             <section className="rounded-[1.75rem] border border-slate-200 bg-slate-50 p-6 shadow-sm">
               <div className="flex items-center justify-between gap-3">
                 <div>
-                  <h3 className="text-xl font-semibold text-slate-900">Busy Drivers ({drivers.length})</h3>
+                  <h3 className="text-xl font-semibold text-slate-900">Busy Drivers</h3>
                   <p className="mt-1 text-sm text-slate-500">Choose one driver to mark as free.</p>
                 </div>
                 <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-amber-700">Busy</span>
@@ -143,7 +130,7 @@ export default function CameOnRoute() {
             <section className="rounded-[1.75rem] border border-slate-200 bg-slate-50 p-6 shadow-sm">
               <div className="flex items-center justify-between gap-3">
                 <div>
-                  <h3 className="text-xl font-semibold text-slate-900">Busy Buses ({buses.length})</h3>
+                  <h3 className="text-xl font-semibold text-slate-900">Busy Buses</h3>
                   <p className="mt-1 text-sm text-slate-500">Pick a bus to mark as free.</p>
                 </div>
                 <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-amber-700">Busy</span>
